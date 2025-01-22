@@ -179,8 +179,9 @@ public class LinkedList {
 			size--;
 			return;
 		}
+		}
 		Node temp= this.first;
-		for(int i=0; i<size;i++){
+		for(int i=1; i<size;i++){
 			if(temp.next.block.equals(node.block)==true){
 				temp.next=temp.next.next;
 				size--;
@@ -213,18 +214,19 @@ public class LinkedList {
 	 *         if the given memory block is not in this list
 	 */
 	public void remove(MemoryBlock block) {
-		Node temp= this.first;
-		if(temp.next.block.equals(block)){
-			this.first=temp.next;
+		if(block==null){throw new IllegalArgumentException("index must be between 0 and size");}
+		if(this.first.block.equals(block)==true){
+			this.first=this.first.next;
 			return;
 		}
+		Node temp= this.first;
 		for(int i=0;i<size-1;i++){
 			if(temp.next.next.block.equals(block)){
 				temp.next=temp.next.next;
 				return;
 				}
 			}
-			throw new IllegalArgumentException(" index must be between 0 and size");
+			throw new IllegalArgumentException("index must be between 0 and size");
 		}
 		
 
