@@ -155,11 +155,13 @@ public class LinkedList {
 	 */
 	public int indexOf(MemoryBlock block) {
 		Node temp= this.first;
-		for(int i=0; i<size;i++){
-			if(temp.block.equals(block)==true){
-				return i-1;
-			}
+		if(temp.block.equals(block)== true){return 0;}
+		for(int i=1; i<size;i++){
 			temp=temp.next;
+			if(temp.block.equals(block)==true){
+				return i;
+			}
+			
 		}
 		return -1;
 	}
