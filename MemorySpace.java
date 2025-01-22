@@ -48,7 +48,7 @@ public class MemorySpace {
 	 * are set to 250 and 17, respectively, and the base address and length
 	 * of the found free block are set to 267 and 3, respectively.
 	 * 
-	 * (4) The new memory block is returned.
+	 * (4) The new ymemor block is returned.
 	 * 
 	 * If the length of the found block is exactly the same as the requested length, 
 	 * then the found block is removed from the freeList and appended to the allocatedList.
@@ -57,8 +57,26 @@ public class MemorySpace {
 	 *        the length (in words) of the memory block that has to be allocated
 	 * @return the base address of the allocated block, or -1 if unable to allocate
 	 */
-	public int malloc(int length) {		
-		//// Replace the following statement with your code
+	public int malloc(int length) {	
+		int address=0;	
+		for(int i=0;i<freeList.getSize();i++){
+			if(freeList.getBlock(i).length >= length){
+				address= freeList.getBlock(i).baseAddress;
+
+				MemoryBlock neww= new MemoryBlock(address, length);
+				allocatedList.addLast(neww);
+
+				freeList.getBlock(i).baseAddress= address + length;
+				freeList.getBlock(i).length= freeList.getBlock(i).length-length;
+				if(freeList.getBlock(i).length== 0){
+					freeList.remove(i);
+
+				}
+
+				return address;
+			}
+
+		}
 		return -1;
 	}
 
@@ -71,7 +89,12 @@ public class MemorySpace {
 	 *            the starting address of the block to freeList
 	 */
 	public void free(int address) {
-		//// Write your code here
+		for(int i=0; i<allocatedList.getSize();i++){
+			if(allocatedList.getBlock(i).baseAddress==address){
+				freeList.addLast(allocatedList.getBlock(i));
+				allocatedList.remove(i);
+			}
+		}
 	}
 	
 	/**
