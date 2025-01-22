@@ -81,8 +81,7 @@ public class LinkedList {
 		if(index<0 || index>size){
 			 throw new IllegalArgumentException("Index is out of bounds"); }
 		Node temp= new Node(block);
-		if(index==0){ temp.next= this.first; this.first=temp;size++;
-				      this.last = temp;  
+		if(index==0){ temp.next= first; this.first=temp;size++;
 			return;}
 		else if(index==size){last.next=temp; last=temp;size ++;return;}
 		 else{ Node temp2 = this.first;
