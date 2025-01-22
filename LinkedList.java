@@ -78,8 +78,23 @@ public class LinkedList {
 	 *         if index is negative or greater than the list's size
 	 */
 	public void add(int index, MemoryBlock block) {
-		//// Write your code here
-	}
+		if(index<0 || index>size){
+			 throw new IllegalArgumentException("Index is out of bounds"); }
+		Node temp= new Node(block);
+		if(index==0){ temp.next= this.first; this.first=temp;size++;
+				      this.last = temp;  
+			return;}
+		else if(index==size){last.next=temp; last=temp;size ++;return;}
+		 else{ Node temp2 = this.first;
+		for(int i=0; i<index-1;i++){
+			temp2=temp2.next;
+			}
+			temp.next=temp2.next;
+			temp2.next=temp;
+		}
+		size++;
+		
+		}
 
 	/**
 	 * Creates a new node that points to the given memory block, and adds it
@@ -89,7 +104,7 @@ public class LinkedList {
 	 *        the given memory block
 	 */
 	public void addLast(MemoryBlock block) {
-		//// Write your code here
+		this.add(this.size,block);
 	}
 	
 	/**
@@ -100,7 +115,7 @@ public class LinkedList {
 	 *        the given memory block
 	 */
 	public void addFirst(MemoryBlock block) {
-		//// Write your code here
+		this.add(0,block);
 	}
 
 	/**
@@ -113,8 +128,16 @@ public class LinkedList {
 	 *         if index is negative or greater than or equal to size
 	 */
 	public MemoryBlock getBlock(int index) {
-		//// Replace the following statement with your code
-		return null;
+		if(index<0 || index>= size){ 
+			throw new IllegalArgumentException("Index is out of bounds"); }
+			Node temp= this.first;
+			for(int i=0;i<index;i++){
+				temp=temp.next;
+			}
+
+			MemoryBlock ans= temp.block;
+
+		return ans;
 	}	
 
 	/**
@@ -125,7 +148,13 @@ public class LinkedList {
 	 * @return the index of the block, or -1 if the block is not in this list
 	 */
 	public int indexOf(MemoryBlock block) {
-		//// Replace the following statement with your code
+		Node temp= this.first;
+		for(int i=0; i<size;i++){
+			if(temp.block.equals(block)==true){
+				return i-1;
+			}
+			temp=temp.next;
+		}
 		return -1;
 	}
 
@@ -136,7 +165,14 @@ public class LinkedList {
 	 *        the node that will be removed from this list
 	 */
 	public void remove(Node node) {
-		//// Write your code here
+		Node temp= this.first;
+		for(int i=0; i<size;i++){
+			if(temp.next.block.equals(node.block)==true){
+				temp.next=temp.next.next;
+				size--;
+				break;
+			}
+		}
 	}
 
 	/**
@@ -147,19 +183,36 @@ public class LinkedList {
 	 *         if index is negative or greater than or equal to size
 	 */
 	public void remove(int index) {
-		//// Write your code here
+		if(index<0 || index>= size){ 
+			throw new IllegalArgumentException("Index is out of bounds"); }
+	Node temp= this.first;
+	for(int i=0; i<index;i++){
+		temp=temp.next;
 	}
-
+	remove(temp);
+	}
 	/**
-	 * Removes from this list the node pointing to the given memory block.
+	 * Removes from this  list the node pointing to the given memory block.
 	 * 
 	 * @param block the memory block that should be removed from the list
 	 * @throws IllegalArgumentException
 	 *         if the given memory block is not in this list
 	 */
 	public void remove(MemoryBlock block) {
-		//// Write your code here
-	}	
+		Node temp= this.first;
+		if(temp.next.block.equals(block)){
+			this.first=temp.next;
+			return;
+		}
+		for(int i=0;i<size-1;i++){
+			if(temp.next.next.block.equals(block)){
+				temp.next=temp.next.next;
+				return;
+				}
+			}
+			throw new IllegalArgumentException("Index is out of bounds");
+		}
+		
 
 	/**
 	 * Returns an iterator over this list, starting with the first element.
@@ -172,7 +225,14 @@ public class LinkedList {
 	 * A textual representation of this list, for debugging.
 	 */
 	public String toString() {
-		//// Replace the following statement with your code
-		return "";
+		Node temp= this.first;
+		String list= "" + temp;
+		for(int i=0;i<size-1;i++){
+			temp=temp.next;
+			list= list  + temp;
+		}
+
+		
+		return list;
 	}
 }
