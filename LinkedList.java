@@ -173,6 +173,12 @@ public class LinkedList {
 	 *        the node that will be removed from this list
 	 */
 	public void remove(Node node) {
+		if(node==null){throw new NullPointerException("!");}
+		if (this.first == node) {
+			this.first = this.first.next;
+			size--;
+			return;
+		}
 		Node temp= this.first;
 		for(int i=0; i<size;i++){
 			if(temp.next.block.equals(node.block)==true){
@@ -182,7 +188,7 @@ public class LinkedList {
 			}
 		}
 	}
-
+	
 	/**
 	 * Removes from this list the node which is located at the given index.
 	 * 
