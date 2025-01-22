@@ -79,7 +79,7 @@ public class LinkedList {
 	 */
 	public void add(int index, MemoryBlock block) {
 		if(index<0 || index>size){
-			 throw new IllegalArgumentException("Index is out of bounds"); }
+			 throw new IllegalArgumentException("index must be between 0 and size"); }
 		Node temp= new Node(block);
 		if(index==0){ temp.next= first; this.first=temp;size++;
 			return;}
@@ -128,7 +128,7 @@ public class LinkedList {
 	 */
 	public MemoryBlock getBlock(int index) {
 		if(index<0 || index>= size){ 
-			throw new IllegalArgumentException("Index is out of bounds"); }
+			throw new IllegalArgumentException(" index must be between 0 and size"); }
 			Node temp= this.first;
 			for(int i=0;i<index;i++){
 				temp=temp.next;
@@ -183,7 +183,7 @@ public class LinkedList {
 	 */
 	public void remove(int index) {
 		if(index<0 || index>= size){ 
-			throw new IllegalArgumentException("Index is out of bounds"); }
+			throw new IllegalArgumentException(" index must be between 0 and size"); }
 	Node temp= this.first;
 	for(int i=0; i<index;i++){
 		temp=temp.next;
@@ -209,7 +209,7 @@ public class LinkedList {
 				return;
 				}
 			}
-			throw new IllegalArgumentException("Index is out of bounds");
+			throw new IllegalArgumentException(" index must be between 0 and size");
 		}
 		
 
