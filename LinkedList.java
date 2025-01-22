@@ -178,16 +178,17 @@ public class LinkedList {
 			this.first = this.first.next;
 			size--;
 			return;
-		}
-		
+		}	
 		Node temp= this.first;
-		for(int i=0; i<size ; i++){
-			if(temp.next.block.equals(node.block)==true){
+	while (temp.next!=null){
+			if(temp.next.block.equals(node.block)){
 				temp.next=temp.next.next;
 				size--;
 				break;
 			}
+			temp=temp.next;
 		}
+		throw new NullPointerException("!");
 }
 	
 	/**
