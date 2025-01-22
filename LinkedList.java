@@ -179,16 +179,16 @@ public class LinkedList {
 			size--;
 			return;
 		}
-		}
+		
 		Node temp= this.first;
-		for(int i=1; i<size;i++){
+		for(int i=0; i<size ; i++){
 			if(temp.next.block.equals(node.block)==true){
 				temp.next=temp.next.next;
 				size--;
 				break;
 			}
 		}
-	}
+}
 	
 	/**
 	 * Removes from this list the node which is located at the given index.
@@ -197,9 +197,11 @@ public class LinkedList {
 	 * @throws IllegalArgumentException
 	 *         if index is negative or greater than or equal to size
 	 */
-	public void remove(int index) {
+	public void remove(int index){
 		if(index<0 || index>= size){ 
-			throw new IllegalArgumentException(" index must be between 0 and size"); }
+			throw new IllegalArgumentException(" index must be between 0 and size");
+		 }
+		 if(index==0){this.first=this.first.next;}
 	Node temp= this.first;
 	for(int i=0; i<index;i++){
 		temp=temp.next;
@@ -215,18 +217,20 @@ public class LinkedList {
 	 */
 	public void remove(MemoryBlock block) {
 		if(block==null){throw new IllegalArgumentException("index must be between 0 and size");}
-		if(this.first.block.equals(block)==true){
-			this.first=this.first.next;
-			return;
-		}
-		Node temp= this.first;
-		for(int i=0;i<size-1;i++){
-			if(temp.next.next.block.equals(block)){
-				temp.next=temp.next.next;
-				return;
-				}
-			}
-			throw new IllegalArgumentException("index must be between 0 and size");
+		//if(this.first.block.equals(block)==true){
+		///	this.first=this.first.next;
+		//	return;
+		//}
+	//	Node temp= this.first;
+		//for(int i=0;i<size-1;i++){
+		//	if(temp.next.next.block.equals(block)){
+		//		temp.next=temp.next.next;
+		//		return;
+		//		}
+		//	}
+		//	throw new IllegalArgumentException("index must be between 0 and size");
+		int index= indexOf(block);
+		remove(index);
 		}
 		
 
