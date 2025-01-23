@@ -174,11 +174,11 @@ public class LinkedList {
 	 */
 	public void remove(Node node) {
 		if(node==null){throw new NullPointerException("!");}
-		if (this.first == node) {
+		if (this.first.block.equals(node.block)){
 		first = this.first.next;
 			size--;
 			
-		}else{
+		}else {
 		Node temp= this.first;
 	while (temp.next!=null){
 			if(temp.next.block.equals(node.block)){
