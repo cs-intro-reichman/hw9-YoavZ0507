@@ -175,10 +175,10 @@ public class LinkedList {
 	public void remove(Node node) {
 		if(node==null){throw new NullPointerException("!");}
 		if (this.first == node) {
-			this.first = this.first.next;
+		first = this.first.next;
 			size--;
-			return;
-		}	
+			
+		}else{
 		Node temp= this.first;
 	while (temp.next!=null){
 			if(temp.next.block.equals(node.block)){
@@ -186,11 +186,12 @@ public class LinkedList {
 				size--;
 				break;
 			}
+		
 			temp=temp.next;
-		}
-		throw new NullPointerException("!");
+	}
+		
 }
-	
+	}	
 	/**
 	 * Removes from this list the node which is located at the given index.
 	 * 
