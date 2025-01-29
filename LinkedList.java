@@ -216,16 +216,38 @@ public class LinkedList {
 	 * @throws IllegalArgumentException
 	 *         if index is negative or greater than or equal to size
 	 */
-	public void remove(int index){
-		if(index<0 || index>= size){ 
-			throw new IllegalArgumentException(" index must be between 0 and size");
-		 }
-		 if(index==0){this.first=this.first.next;}
-	Node temp= this.first;
-	for(int i=0; i<index;i++){
-		temp=temp.next;
-	}
-	remove(temp);
+	public void remove(int index) {
+		if (index < 0 || index > size) {
+			throw new IllegalArgumentException(
+					"index must be between 0 and size");
+		}
+		Node current = first; 
+		Node prev = null;
+		if (index == 0) {
+			first = current.next;
+			if (first == null) {  // If list becomes empty
+				last = null;
+			}
+			size--;
+			return;
+		}
+		int counter = 0;
+
+		while (current != null && counter != index) {
+			prev = current;
+			current = current.next;
+			counter++;
+		}
+		if (current == null) {
+			return;
+		}
+		if (index == size - 1) {
+			prev.next = null; 
+			last = prev; 
+		} else {
+			prev.next = current.next;
+		}
+		size--;
 	}
 	/**
 	 * Removes from this  list the node pointing to the given memory block.
@@ -235,23 +257,37 @@ public class LinkedList {
 	 *         if the given memory block is not in this list
 	 */
 	public void remove(MemoryBlock block) {
-		if(block==null){throw new IllegalArgumentException("index must be between 0 and size");}
-		//if(this.first.block.equals(block)==true){
-		///	this.first=this.first.next;
-		//	return;
-		//}
-	//	Node temp= this.first;
-		//for(int i=0;i<size-1;i++){
-		//	if(temp.next.next.block.equals(block)){
-		//		temp.next=temp.next.next;
-		//		return;
-		//		}
-		//	}
-		//	throw new IllegalArgumentException("index must be between 0 and size");
-		int index= indexOf(block);
-		remove(index);
+		if (indexOf(block) == -1) {
+			throw new IllegalArgumentException(
+					"index must be between 0 and size");
 		}
-		
+		Node current = first; 
+		Node prev = null; 
+		int counter = 0;
+		if (block.equals(first.block)) {
+			first = first.next;
+			if (first == null) {  
+				last = null;
+			}
+			size--;
+			return;
+		}
+		while (current != null) {
+			if (block.equals(current.block)) {
+				if (current == last) {
+					last = prev;
+					prev.next = null;
+				} else {
+					prev.next = current.next;
+				}
+				size--;
+				return;
+			}
+			prev = current;
+			current = current.next;
+			counter++;
+		}
+	}	
 
 	/**
 	 * Returns an iterator over this list, starting with the first element.
@@ -264,14 +300,14 @@ public class LinkedList {
 	 * A textual representation of this list, for debugging.
 	 */
 	public String toString() {
-		Node temp= this.first;
-		String list= "" + temp;
-		for(int i=0;i<size-1;i++){
-			temp=temp.next;
-			list= list  + temp;
+		String s = "";
+		Node current = first; 
+		int counter = 0;
+		while (current != null) {
+			s += (getBlock(counter)) + " ";
+			current = current.next;
+			counter++;
 		}
-
-		
-		return list;
+		return s;
 	}
 }
